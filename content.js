@@ -1,7 +1,7 @@
 function createContent(data){
   let content = [];
-  for(let i=0; i<=5; i++){
-    let paragraph = `${data[i].title} (${data[i].year})- ${data[i].genres}`;
+  for(let movie of data){
+    let paragraph = `${movie.title} (${movie.year}) - ${movie.genres}`;
     let element = {"tag": "p", "children": [`${paragraph}`]};
 
     let format = {

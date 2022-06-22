@@ -6,12 +6,11 @@ require('dotenv').config()
 
 const createPageUrl = "https://api.telegra.ph/createPage";
 const pageParams = {
-  params: {
-    access_token: process.env.TELEGRAPH_TOKEN,
-    title: "Result",
-    author_name: "Binge Bot",
-    content: ""
-  }
+  access_token: process.env.TELEGRAPH_TOKEN,
+  title: "Result",
+  author_name: "Binge Bot",
+  content: ""
+
 }
 
 async function createPage(response) {
@@ -37,26 +36,17 @@ async function createPage(response) {
 
     results.push(currentMovie);
   }
-  return resultString(results);
 
   // Create page
-  // pageParams.params.content = JSON.stringify(createContent(results));
-  // try {
-  //   const res = await axios.get(createPageUrl, pageParams);
-  //   console.log(res.data.result.url);
-  //   return res.data.result.url;
+  pageParams.content = JSON.stringify(createContent(results));
+  try {
+    const res = await axios.post(createPageUrl, pageParams);
+    console.log(res.data.result.url);
+    return res.data.result.url;
 
-  // } catch (error) {
-  //   console.log("Error Ocurred while creating telegraph-> ", error);
-  // }
-}
-
-function resultString(data) {
-  const results = [];
-  for (let movie of data) {
-    results.push(`${movie.title} (${movie.year})- ${movie.genres}`);
+  } catch (error) {
+    console.log("Error Ocurred while creating telegraph-> ", error);
   }
-  return results;
 }
 
 module.exports = createPage;
