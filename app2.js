@@ -28,7 +28,7 @@ async function handleQuery(msg, type, requiredGenres, selectedCountries) {
   msg.reply.text('Please Wait, getting what you want');
   const result = await fetchDetails(requiredGenres, type, page, selectedCountries);
 
-  if (result.length != 0) {
+  if (result) {
     let newFetchType = (type == entertainment.movie)
       ? 'fetchMovies' + selectedCountries
       : 'fetchTV' + selectedCountries;
@@ -75,7 +75,7 @@ bot.on('callbackQuery', async msg => {
       result = await fetchDetails(requiredGenres, entertainment.tv, page, selectedCountries);
     }
 
-    if (result.length != 0) {
+    if (result) {
       const newFetchType = queryType + selectedCountries;
       const callback = `${newFetchType} ${requiredGenres}`;
 

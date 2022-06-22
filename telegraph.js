@@ -15,6 +15,7 @@ const pageParams = {
 }
 
 async function createPage(response) {
+  if (response.length == 0) return undefined;
   const results = [];
 
   for (let movie of response) {
@@ -30,7 +31,7 @@ async function createPage(response) {
     }
 
     currentMovie.title = movie.name || movie.title;
-    currentMovie.year = (movie.release_date).split('-')[0];
+    currentMovie.year = (movie.release_date || movie.first_air_date).split('-')[0];
     currentMovie.rating = movie.vote_average;
     currentMovie.genres = [...new Set(movieGenres)];  // to remove duplicates
 
@@ -42,6 +43,8 @@ async function createPage(response) {
   try{
     const res = await axios.get(createPageUrl, pageParams);
     console.log(res.data.result.url);
+    return res.data.result.url;
+
   }catch(error){
     console.log("Error Ocurred while creating telegraph-> ",error);
   }
