@@ -20,7 +20,7 @@ async function createPage(response) {
 
   for (let movie of response) {
     var movieGenres = [];
-    
+
     for (let genreId of movie.genre_ids) {
       var currentMovie = {};
       for (let currentGenre of allGenres) {
@@ -37,17 +37,26 @@ async function createPage(response) {
 
     results.push(currentMovie);
   }
+  return resultString(results);
 
-  pageParams.params.content = JSON.stringify(createContent(results));
-  // console.log(pageParams.params.content);
-  try{
-    const res = await axios.get(createPageUrl, pageParams);
-    console.log(res.data.result.url);
-    return res.data.result.url;
+  // Create page
+  // pageParams.params.content = JSON.stringify(createContent(results));
+  // try {
+  //   const res = await axios.get(createPageUrl, pageParams);
+  //   console.log(res.data.result.url);
+  //   return res.data.result.url;
 
-  }catch(error){
-    console.log("Error Ocurred while creating telegraph-> ",error);
+  // } catch (error) {
+  //   console.log("Error Ocurred while creating telegraph-> ", error);
+  // }
+}
+
+function resultString(data) {
+  const results = [];
+  for (let movie of data) {
+    results.push(`${movie.title} (${movie.year})- ${movie.genres}`);
   }
- }
+  return results;
+}
 
 module.exports = createPage;

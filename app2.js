@@ -37,7 +37,7 @@ async function handleQuery(msg, type, requiredGenres, selectedCountries) {
     const moreButton = bot.inlineKeyboard([
       [bot.inlineButton('More', { callback })]
     ]);
-    bot.sendMessage(msg.from.id, result.toString(), { replyMarkup: moreButton })
+    bot.sendMessage(msg.from.id, result.join('\n\n'), { replyMarkup: moreButton })
   } else {
     msg.reply.text('Nothing found! you have a crazy taste');
   }
@@ -82,7 +82,7 @@ bot.on('callbackQuery', async msg => {
       const moreButton = bot.inlineKeyboard([
         [bot.inlineButton('More', { callback })]
       ]);
-      bot.editMessageText({ chatId, messageId }, result.toString(),
+      bot.editMessageText({ chatId, messageId }, result.join('\n\n'),
         { replyMarkup: moreButton })
     } else {
       msg.reply.text('Nothing found! you have a crazy taste');
