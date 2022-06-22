@@ -1,8 +1,9 @@
 require('dotenv').config()
+const {welcomeMsg, avaliableGenres, entertainment,countries } =  require('./constants');
+
 const fetchDetails = require('./fetch');
 
 const TeleBot = require('telebot');
-const { setGameScore } = require('telebot/lib/methods');
 const url = `${process.env.SERVER_URL}/webhook/${process.env.BOT_TOKEN}`;
 
 const bot = new TeleBot({
@@ -14,16 +15,6 @@ const bot = new TeleBot({
     maxConnections: 40
   }
 });
-
-const entertainment = {
-  movie: 0,
-  tv: 1
-}
-
-const countries = {
-  indian: 0,
-  globally: 1
-}
 
 let page = 1;
 
@@ -103,7 +94,7 @@ bot.on('callbackQuery', async msg => {
 })
 
 // fetch movies globally
-bot.on([/^\/movies (.+)$/, '/movies'], async (msg, props) => {
+bot.on([/^\/movies (.+)$/], async (msg, props) => {
   if (!props.match) msg.reply.text('Include genres. Try /start for examples');
   else {
     const requiredGenres = props.match[1].split(/[ ,]+/);
@@ -116,7 +107,7 @@ bot.on([/^\/movies (.+)$/, '/movies'], async (msg, props) => {
 });
 
 // fetch web series globally
-bot.on([/^\/tv (.+)$/, '/tv'], async (msg, props) => {
+bot.on([/^\/tv (.+)$/], async (msg, props) => {
   if (!props.match) msg.reply.text('Include genres. Try /start for examples');
   else {
     const requiredGenres = props.match[1].split(/[ ,]+/);
@@ -163,22 +154,5 @@ bot.on('text', msg => {
   Try /start`)
   }
 })
-
-
-const welcomeMsg = `
-Just type /movies <genres here> for movies or /tv <genres here> for tv series.
--> If you want only indian stuffs use /imovies and /itv instead
--> genres should be seperated by space or an comma
--> Example: /movies romantic, action
--> Example:  /itv action comedy
-
-Type /genres to get a list of avaliable genres`
-
-const avaliableGenres = [
-  'History', 'Music', 'Thriller', 'Horror', 'Action', 'Adventure',
-  'Animation', 'Comedy', 'Crime', 'Documentary', 'Drama', 'Romantic',
-  'Family', 'Kids', 'Mystery', 'News', 'Reality', 'Sci-Fi', 'Fantasy',
-  'Soap', 'Talk', 'War & Politics', 'Western'
-]
 
 bot.start()

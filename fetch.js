@@ -1,4 +1,6 @@
 require('dotenv').config()
+const { countries, entertainment} = require('./constants');
+const createPage = require('./telegraph')
 
 // Movies and Tv shows
 const discoverMovieBaseUrl = "https://api.themoviedb.org/3/discover/movie";
@@ -8,11 +10,6 @@ const discoverTvBaseUrl = "https://api.themoviedb.org/3/discover/tv";
 const languagesUrl = "https://api.themoviedb.org/3/configuration/languages?api_key=83aa95266455a2c5d1ad593b55f9da5b";
 const countriesUrl = "https://api.themoviedb.org/3/configuration/countries?api_key=83aa95266455a2c5d1ad593b55f9da5b";
 const imageBaseUrl = "http://image.tmdb.org/t/p/w500";
-
-const countries = {
-  indian: 0,
-  globally: 1
-}
 
 // custom filters
 const indianLanguages = "hi|kn|ml|ta|te";
@@ -39,7 +36,7 @@ const getDetails = async (requiredGenres, type, page, seletedCountries) => {
       ? indianLanguages
       : '';
 
-  const url = type == 0 ? discoverMovieBaseUrl : discoverTvBaseUrl
+  const url = type == entertainment.movie ? discoverMovieBaseUrl : discoverTvBaseUrl
   try {
     let results = [];
     const res = await axios.get(url, movieParams)
@@ -61,7 +58,7 @@ const getDetails = async (requiredGenres, type, page, seletedCountries) => {
       const title = movie.name || movie.title;
       results.push(title + ' ' + movieGenres.toString() + ' ' + posterLink + '\n');
     }
-    // console.log(res);
+    createPage(res.data.results)
     return results;
   } catch (e) {
     console.log("fetch error: ", e);
