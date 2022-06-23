@@ -23,7 +23,9 @@ const movieParams = {
 const axios = require('axios').default;
 require('dotenv').config()
 
+// main driver function
 const getDetails = async (requiredGenres, type, page, seletedCountries) => {
+  // update query parameters
   movieParams.params.with_genres = getIds(requiredGenres);
   movieParams.params.page = parseInt(page);
   movieParams.params.with_original_language =
@@ -31,19 +33,21 @@ const getDetails = async (requiredGenres, type, page, seletedCountries) => {
       ? indianLanguages
       : '';
 
+  // choose what we want
   const url = (type == entertainment.movie)
     ? discoverMovieBaseUrl
     : discoverTvBaseUrl;
   try {
-    const res = await axios.get(url, movieParams)
-    const generatedLink = await createPage(res.data.results)
-    if (generatedLink) return generatedLink; else undefined;
+    const res = await axios.get(url, movieParams) // calling TMDB API
+    const generatedLink = await createPage(res.data.results)  // return telegra.ph results or undefined if no result found
+    if (generatedLink) return generatedLink; else undefined;  // retuns link if generetated
 
   } catch (e) {
     console.log("fetch error: ", e);
   }
 }
 
+// Returns IDs from genre String coz TMDB API requires IDs
 function getIds(genreString) {
   let requiredGenres = [...genreString];
   for (let index = 0; index < requiredGenres.length; index++) {
