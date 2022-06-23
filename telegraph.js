@@ -12,7 +12,7 @@ const pageParams = {
   content: ""
 
 }
-
+// calls telegra.ph API and creates page
 async function createPage(response) {
   if (response.length == 0) return undefined;
   const results = [];
@@ -28,7 +28,7 @@ async function createPage(response) {
         }
       }
     }
-
+    // create object for every movie/web series
     currentMovie.title = movie.name || movie.title;
     currentMovie.year = (movie.release_date || movie.first_air_date).split('-')[0];
     currentMovie.rating = movie.vote_average;
@@ -37,10 +37,10 @@ async function createPage(response) {
     results.push(currentMovie);
   }
 
-  // Create page
+  // get result in required node element format
   pageParams.content = JSON.stringify(createContent(results));
   try {
-    const res = await axios.post(createPageUrl, pageParams);
+    const res = await axios.post(createPageUrl, pageParams);  // creates actual page
     console.log(res.data.result.url);
     return res.data.result.url;
 

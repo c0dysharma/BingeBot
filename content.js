@@ -1,8 +1,9 @@
-function createContent(data){
+//Creates Node Array of node element required by telegra.ph API 
+function createContent(data) {
   let content = [];
-  for(let movie of data){
+  for (let movie of data) {
     let paragraph = `${movie.title} (${movie.year}) - ${movie.genres}`;
-    let element = {"tag": "p", "children": [`${paragraph}`]};
+    let element = { "tag": "p", "children": [`${paragraph}`] };
 
     let format = {
       "tag": "ul", "children": [
