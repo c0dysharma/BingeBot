@@ -1,6 +1,5 @@
 require('dotenv').config()
 const {welcomeMsg, avaliableGenres, entertainment,countries } =  require('./constants');
-
 const fetchDetails = require('./fetch');
 
 const TeleBot = require('telebot');
