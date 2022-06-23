@@ -32,7 +32,8 @@ async function createPage(response) {
     currentMovie.title = movie.name || movie.title;
     currentMovie.year = (movie.release_date || movie.first_air_date).split('-')[0];
     currentMovie.rating = movie.vote_average;
-    currentMovie.genres = [...new Set(movieGenres)];  // to remove duplicates
+    currentMovie.genres = [...new Set(movieGenres)].join(', ');  // to remove duplicates
+    currentMovie.overview = movie.overview;
 
     results.push(currentMovie);
   }

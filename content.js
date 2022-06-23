@@ -2,8 +2,10 @@
 function createContent(data) {
   let content = [];
   for (let movie of data) {
-    let paragraph = `${movie.title} (${movie.year}) - ${movie.genres}`;
-    let element = { "tag": "p", "children": [`${paragraph}`] };
+    let title = { "tag": "b", "children": [`${movie.title} (${movie.year}) • Rating ${movie.rating}` ] };
+    let genre = { "tag": "p", "children": [`\n- ${movie.genres}`] };
+    let overview = { "tag": "i", "children": [`\n${movie.overview}`]
+}
 
     let format = {
       "tag": "ul", "children": [
@@ -12,7 +14,9 @@ function createContent(data) {
         }
       ]
     }
-    format.children[0].children.push(element);
+    format.children[0].children.push(title);
+    format.children[0].children.push(genre);
+    format.children[0].children.push(overview);
     content.push(format);
   }
   return content;
