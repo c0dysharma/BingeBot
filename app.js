@@ -23,10 +23,12 @@ bot.on(['/start', '/Start', '/hello', 'start', '/help', 'help'], (msg) => {
   msg.reply.text(welcomeMsg);
 });
 
+// function responsible for handling queries
 async function handleQuery(msg, type, requiredGenres, selectedCountries) {
   msg.reply.text('Please Wait, getting what you want');
   const result = await fetchDetails(requiredGenres, type, page, selectedCountries);
 
+  // concatinating selectedCountries to preserve query for more button
   if (result) {
     let newFetchType = (type == entertainment.movie)
       ? 'fetchMovies' + selectedCountries
@@ -36,18 +38,22 @@ async function handleQuery(msg, type, requiredGenres, selectedCountries) {
     const moreButton = bot.inlineKeyboard([
       [bot.inlineButton('More', { callback })]
     ]);
+    // send response with inine more button
     bot.sendMessage(msg.from.id, result.toString(), { replyMarkup: moreButton })
   } else {
+    // if result is empty
     msg.reply.text('Nothing found! you have a crazy taste');
   }
 };
 
+// returns true if event for such query exists
 function isHandled(text) {
   const allQuries = ['/start', '/Start', '/hello', 'start', '/help', 'help',
     '/movies', '/tv', '/imovies', '/itv', '/genres', 'sticker'];
   return allQuries.includes(text.split(' ')[0]);
 }
 
+// runs when more button is pressed
 bot.on('callbackQuery', async msg => {
   const chatId = msg.message.chat.id;
   const messageId = msg.message.message_id;
@@ -63,7 +69,7 @@ bot.on('callbackQuery', async msg => {
     ? 'fetchMovies'
     : 'fetchTV';
 
-
+  // get next page in response
   page++;
   let result;
 
@@ -81,9 +87,11 @@ bot.on('callbackQuery', async msg => {
       const moreButton = bot.inlineKeyboard([
         [bot.inlineButton('More', { callback })]
       ]);
+      // edit existing message with new response
       bot.editMessageText({ chatId, messageId }, result.toString(),
         { replyMarkup: moreButton })
     } else {
+      // if no more result exits
       msg.reply.text('Nothing found! you have a crazy taste');
     }
 
@@ -107,7 +115,7 @@ bot.on('/movies', async (msg) => {
 });
 
 // fetch web series globally
-bot.on('/tv', async (msg, props) => {
+bot.on('/tv', async (msg) => {
   if (msg.text.split(' ').length == 1)
     msg.reply.text('Include genres. Try /start for examples');
   else {
@@ -153,10 +161,12 @@ bot.on('/genres', msg => {
   msg.reply.text(avaliableGenres.join(', '));
 })
 
+// nothing required
 bot.on('sticker', msg => {
   msg.reply.text('You kidding me :P');
 })
 
+// handle which events aren't handled
 bot.on('text', msg => {
   if (!isHandled(msg.text)) {
     msg.reply.text(`Invalid command: ${msg.text}
@@ -164,4 +174,4 @@ bot.on('text', msg => {
   }
 })
 
-bot.start()
+bot.start() // starts the bot
