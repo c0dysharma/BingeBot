@@ -1,5 +1,5 @@
 require('dotenv').config()
-const {welcomeMsg, avaliableGenres, entertainment,countries } =  require('./constants');
+const { welcomeMsg, avaliableGenres, entertainment, countries } = require('./constants');
 const fetchDetails = require('./fetch');
 
 const TeleBot = require('telebot');
@@ -93,10 +93,11 @@ bot.on('callbackQuery', async msg => {
 })
 
 // fetch movies globally
-bot.on([/^\/movies (.+)$/], async (msg, props) => {
-  if (!props.match) msg.reply.text('Include genres. Try /start for examples');
+bot.on('/movies', async (msg) => {
+  if (msg.text.split(' ').length == 1)
+    msg.reply.text('Include genres. Try /start for examples');
   else {
-    const requiredGenres = props.match[1].split(/[ ,]+/);
+    const requiredGenres = msg.text.split(' ')[1].split(/[ ,]+/);
     try {
       handleQuery(msg, entertainment.movie, requiredGenres, countries.globally);
     } catch (error) {
@@ -106,10 +107,11 @@ bot.on([/^\/movies (.+)$/], async (msg, props) => {
 });
 
 // fetch web series globally
-bot.on([/^\/tv (.+)$/], async (msg, props) => {
-  if (!props.match) msg.reply.text('Include genres. Try /start for examples');
+bot.on('/tv', async (msg, props) => {
+  if (msg.text.split(' ').length == 1)
+    msg.reply.text('Include genres. Try /start for examples');
   else {
-    const requiredGenres = props.match[1].split(/[ ,]+/);
+    const requiredGenres = msg.text.split(' ')[1].split(/[ ,]+/);
     try {
       handleQuery(msg, entertainment.tv, requiredGenres, countries.globally);
     } catch (error) {
@@ -119,22 +121,30 @@ bot.on([/^\/tv (.+)$/], async (msg, props) => {
 });
 
 // fetch movies indian
-bot.on(/^\/imovies (.+)$/, async (msg, props) => {
-  const requiredGenres = props.match[1].split(/[ ,]+/);
-  try {
-    handleQuery(msg, entertainment.movie, requiredGenres, countries.indian);
-  } catch (error) {
-    console.log("I broke lol error->", error);
+bot.on('/imovies', async (msg) => {
+  if (msg.text.split(' ').length == 1)
+    msg.reply.text('Include genres. Try /start for examples');
+  else {
+    const requiredGenres = msg.text.split(' ')[1].split(/[ ,]+/);
+    try {
+      handleQuery(msg, entertainment.movie, requiredGenres, countries.indian);
+    } catch (error) {
+      console.log("I broke lol error->", error);
+    }
   }
 });
 
 // fetch web series indian
-bot.on(/^\/itv (.+)$/, async (msg, props) => {
-  const requiredGenres = props.match[1].split(/[ ,]+/);
-  try {
-    handleQuery(msg, entertainment.tv, requiredGenres, countries.indian);
-  } catch (error) {
-    console.log("I broke lol error->", error);
+bot.on('/itv', async (msg) => {
+  if (msg.text.split(' ').length == 1)
+    msg.reply.text('Include genres. Try /start for examples');
+  else {
+    const requiredGenres = msg.text.split(' ')[1].split(/[ ,]+/);
+    try {
+      handleQuery(msg, entertainment.tv, requiredGenres, countries.indian);
+    } catch (error) {
+      console.log("I broke lol error->", error);
+    }
   }
 });
 
