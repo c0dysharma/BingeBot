@@ -105,7 +105,8 @@ bot.on('/movies', async (msg) => {
   if (msg.text.split(' ').length == 1)
     msg.reply.text('Include genres. Try /start for examples');
   else {
-    const requiredGenres = msg.text.split(' ')[1].split(/[ ,]+/);
+    const requiredGenres = msg.text.split(/[ ,]+/);
+    requiredGenres.shift(); // remove /command
     try {
       handleQuery(msg, entertainment.movie, requiredGenres, countries.globally);
     } catch (error) {
@@ -119,7 +120,8 @@ bot.on('/tv', async (msg) => {
   if (msg.text.split(' ').length == 1)
     msg.reply.text('Include genres. Try /start for examples');
   else {
-    const requiredGenres = msg.text.split(' ')[1].split(/[ ,]+/);
+    const requiredGenres = msg.text.split(/[ ,]+/);
+    requiredGenres.shift(); // remove /command
     try {
       handleQuery(msg, entertainment.tv, requiredGenres, countries.globally);
     } catch (error) {
@@ -133,7 +135,8 @@ bot.on('/imovies', async (msg) => {
   if (msg.text.split(' ').length == 1)
     msg.reply.text('Include genres. Try /start for examples');
   else {
-    const requiredGenres = msg.text.split(' ')[1].split(/[ ,]+/);
+    const requiredGenres = msg.text.split(/[ ,]+/);
+    requiredGenres.shift(); // remove /command
     try {
       handleQuery(msg, entertainment.movie, requiredGenres, countries.indian);
     } catch (error) {
@@ -147,7 +150,8 @@ bot.on('/itv', async (msg) => {
   if (msg.text.split(' ').length == 1)
     msg.reply.text('Include genres. Try /start for examples');
   else {
-    const requiredGenres = msg.text.split(' ')[1].split(/[ ,]+/);
+    const requiredGenres = msg.text.split(/[ ,]+/);
+    requiredGenres.shift(); // remove /command
     try {
       handleQuery(msg, entertainment.tv, requiredGenres, countries.indian);
     } catch (error) {

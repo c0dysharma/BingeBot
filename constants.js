@@ -13,7 +13,7 @@ const allGenres = [
   },
   {
     "id": '53',
-    name: "Thriller"
+    name: "Suspense & Thriller"
   },
   {
     "id": '27',
