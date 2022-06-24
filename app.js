@@ -1,19 +1,10 @@
 require('dotenv').config()
 const { welcomeMsg, avaliableGenres, entertainment, countries } = require('./constants');
 const fetchDetails = require('./fetch');
+const { localConfig, herokuConfig} = require('./config')
 
 const TeleBot = require('telebot');
-const url = `${process.env.SERVER_URL}/webhook/${process.env.BOT_TOKEN}`;
-
-const bot = new TeleBot({
-  token: process.env.BOT_TOKEN,
-  webhook: {
-    url: url,
-    host: '127.0.0.1',
-    port: 5000,
-    maxConnections: 40
-  }
-});
+const bot = new TeleBot(localConfig);
 
 let page = 1;
 

@@ -11,7 +11,7 @@ const indianLanguages = "hi|kn|ml|ta|te";
 
 const movieParams = {
   params: {
-    api_key: process.env.API_KEY,
+    api_key: process.env.TMDB_API_KEY,
     language: "en-US",
     sort_by: "popularity.desc",
     page: 1,
