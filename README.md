@@ -3,10 +3,8 @@
   <br>
 </h1>
 
-<img href="./screenshots/NAME.png" align="center" >
-
 <h2 align="center">I can suggest movies and tv/web series to you based on genres and popularity</h2>
-<h3 align="center">Try on <a href="https://t.me/binge1bot">https://t.me/binge1bot</a> </h3>
+<h3 align="center">Try on <a href="https://t.me/binge1bot" target="_blank">https://t.me/binge1bot</a> </h3>
 <hr>
 <br>
 
