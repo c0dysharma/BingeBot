@@ -38,7 +38,7 @@
 <br>
 
 ## **Getting Started**
-Head over to `.env` file and fill these details
+Create a file named exactly `.env` and fill these details
 <br>
 
 `BOT_TOKEN = "Token-Here"` [Telegram Bot Token](https://core.telegram.org/bots#6-botfather)
