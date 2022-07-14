@@ -1,5 +1,5 @@
 <h1 align="center">
-  <b>Bing Bot</b>
+  <b>Binge Bot</b>
   <br>
 </h1>
 
