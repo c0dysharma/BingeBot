@@ -5,7 +5,7 @@ const { localConfig, herokuConfig } = require('./config')
 const { handleQuery, isHandled } = require('./recommends/brain')
 
 const TeleBot = require('telebot');
-const bot = new TeleBot(localConfig);
+const bot = new TeleBot(herokuConfig);
 
 let page = 1;
 
