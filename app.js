@@ -1,11 +1,14 @@
 require('dotenv').config()
 const { welcomeMsg, avaliableGenres, entertainment, countries } = require('./constants');
 const fetchDetails = require('./recommends/fetch');
-const { localConfig, herokuConfig } = require('./config')
+const { localConfig, herokuConfig, torrentConfig } = require('./config')
 const { handleQuery, isHandled } = require('./recommends/brain')
+const { searchTorrent } = require('./torrent/brain')
 
 const TeleBot = require('telebot');
+const { Snowfl, Sort } = require('snowfl-api');
 const bot = new TeleBot(herokuConfig);
+const snowfl = new Snowfl();
 
 let page = 1;
 
@@ -125,10 +128,22 @@ bot.on('/itv', async (msg) => {
 // watch avaliable genres
 bot.on('/genres', msg => {
   msg.reply.text(avaliableGenres.join(', '));
-  console.log('testing');
 })
 
-
+// searches torrent and give results
+bot.on('/torrent', async (msg) => {
+  if (msg.text.split(' ').length == 1)
+    msg.reply.text('Include search query. Try /start for examples');
+  else {
+    const query = msg.text.split(' ')[1];
+    try {
+      const res = await searchTorrent(snowfl, query, torrentConfig);
+      console.log(res);
+    } catch (error) {
+      console.log("I broke lol error->", error);
+    }
+  }
+});
 
 // nothing required
 bot.on('sticker', msg => {

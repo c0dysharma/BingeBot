@@ -1,4 +1,6 @@
 require('dotenv').config()
+const {Sort} = require('snowfl-api');
+
 const url = `${process.env.SERVER_URL}/webhook/${process.env.BOT_TOKEN}`;
 const localConfig = {
   token: process.env.BOT_TOKEN,
@@ -20,7 +22,13 @@ const herokuConfig = {
   }
 }
 
+const torrentConfig = {
+  sort: Sort.MAX_SEED,
+  includeNsfw: false
+}
+
 module.exports = {
   localConfig,
-  herokuConfig
+  herokuConfig,
+  torrentConfig
 }
