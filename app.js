@@ -143,12 +143,15 @@ bot.on('/torrent', async (msg) => {
   if (msg.text.split(' ').length == 1)
     msg.reply.text('Include search query. Try /start for examples');
   else {
-    let res = await (await axios.get('https://snowfl.com/'));
+    let res = await axios.get('https://snowfl.com/', {headers: {
+      "User-Agent" : "Mozilla/5.0 (X11; Linux x86_64; rv:101.0) Gecko/20100101 Firefox/101.0"
+    }});
     console.log(res.status);
+
     const query = msg.text.split(' ')[1];
     try {
-      const res = await searchTorrent(snowfl, query, torrentConfig);
-      console.log(res);
+      // const res = await searchTorrent(snowfl, query, torrentConfig);
+      // console.log(res);
     } catch (error) {
       console.log("I broke lol error->", error);
     }
