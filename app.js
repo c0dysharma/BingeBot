@@ -2,7 +2,7 @@ require('dotenv').config()
 const { welcomeMsg, avaliableGenres, entertainment, countries } = require('./constants');
 const fetchDetails = require('./recommends/fetch');
 const { localConfig, herokuConfig, torrentConfig } = require('./config')
-const { handleQuery, isHandled } = require('./recommends/brain')
+const { handleQuery } = require('./recommends/brain')
 const { searchTorrent } = require('./torrent/brain')
 
 const TeleBot = require('telebot');
@@ -64,6 +64,13 @@ bot.on('callbackQuery', async msg => {
     console.log('New Fetch faild==>', error);
   }
 })
+
+// returns true if event for such query exists
+function isHandled(text) {
+  const allQuries = ['/start', '/Start', '/hello', 'start', '/help', 'help',
+    '/movies', '/tv', '/imovies', '/itv', '/genres', 'sticker', '/torrent'];
+  return allQuries.includes(text.split(' ')[0]);
+}
 
 // fetch movies globally
 bot.on('/movies', async (msg) => {

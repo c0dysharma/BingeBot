@@ -23,11 +23,4 @@ async function handleQuery(bot, msg, type, requiredGenres, selectedCountries, pa
   }
 };
 
-// returns true if event for such query exists
-function isHandled(text) {
-  const allQuries = ['/start', '/Start', '/hello', 'start', '/help', 'help',
-    '/movies', '/tv', '/imovies', '/itv', '/genres', 'sticker'];
-  return allQuries.includes(text.split(' ')[0]);
-}
-
-module.exports = {handleQuery, isHandled}
+module.exports = {handleQuery}
