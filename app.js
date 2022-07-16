@@ -1,7 +1,8 @@
 require('dotenv').config()
 const { welcomeMsg, avaliableGenres, entertainment, countries } = require('./constants');
-const fetchDetails = require('./fetch');
-const { localConfig, herokuConfig} = require('./config')
+const fetchDetails = require('./recommends/fetch');
+const { localConfig, herokuConfig } = require('./config')
+const { handleQuery, isHandled } = require('./recommends/brain')
 
 const TeleBot = require('telebot');
 const bot = new TeleBot(localConfig);
@@ -13,36 +14,6 @@ bot.on(['/start', '/Start', '/hello', 'start', '/help', 'help'], (msg) => {
   page = 1;
   msg.reply.text(welcomeMsg);
 });
-
-// function responsible for handling queries
-async function handleQuery(msg, type, requiredGenres, selectedCountries) {
-  msg.reply.text('Please Wait, getting what you want');
-  const result = await fetchDetails(requiredGenres, type, page, selectedCountries);
-
-  // concatinating selectedCountries to preserve query for more button
-  if (result) {
-    let newFetchType = (type == entertainment.movie)
-      ? 'fetchMovies' + selectedCountries
-      : 'fetchTV' + selectedCountries;
-
-    let callback = `${newFetchType} ${requiredGenres}`;
-    const moreButton = bot.inlineKeyboard([
-      [bot.inlineButton('More', { callback })]
-    ]);
-    // send response with inine more button
-    bot.sendMessage(msg.from.id, result.toString(), { replyMarkup: moreButton })
-  } else {
-    // if result is empty
-    msg.reply.text('Nothing found! you have a crazy taste');
-  }
-};
-
-// returns true if event for such query exists
-function isHandled(text) {
-  const allQuries = ['/start', '/Start', '/hello', 'start', '/help', 'help',
-    '/movies', '/tv', '/imovies', '/itv', '/genres', 'sticker'];
-  return allQuries.includes(text.split(' ')[0]);
-}
 
 // runs when more button is pressed
 bot.on('callbackQuery', async msg => {
@@ -99,7 +70,7 @@ bot.on('/movies', async (msg) => {
     const requiredGenres = msg.text.split(/[ ,]+/);
     requiredGenres.shift(); // remove /command
     try {
-      handleQuery(msg, entertainment.movie, requiredGenres, countries.globally);
+      handleQuery(bot, msg, entertainment.movie, requiredGenres, countries.globally, page);
     } catch (error) {
       console.log("I broke lol error->", error);
     }
@@ -114,7 +85,7 @@ bot.on('/tv', async (msg) => {
     const requiredGenres = msg.text.split(/[ ,]+/);
     requiredGenres.shift(); // remove /command
     try {
-      handleQuery(msg, entertainment.tv, requiredGenres, countries.globally);
+      handleQuery(bot, msg, entertainment.tv, requiredGenres, countries.globally, page);
     } catch (error) {
       console.log("I broke lol error->", error);
     }
@@ -129,7 +100,7 @@ bot.on('/imovies', async (msg) => {
     const requiredGenres = msg.text.split(/[ ,]+/);
     requiredGenres.shift(); // remove /command
     try {
-      handleQuery(msg, entertainment.movie, requiredGenres, countries.indian);
+      handleQuery(bot, msg, entertainment.movie, requiredGenres, countries.indian, page);
     } catch (error) {
       console.log("I broke lol error->", error);
     }
@@ -144,7 +115,7 @@ bot.on('/itv', async (msg) => {
     const requiredGenres = msg.text.split(/[ ,]+/);
     requiredGenres.shift(); // remove /command
     try {
-      handleQuery(msg, entertainment.tv, requiredGenres, countries.indian);
+      handleQuery(bot, msg, entertainment.tv, requiredGenres, countries.indian);
     } catch (error) {
       console.log("I broke lol error->", error);
     }

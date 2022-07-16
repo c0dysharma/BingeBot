@@ -1,5 +1,5 @@
 const axios = require('axios').default;
-const { allGenres } = require('./constants');
+const { allGenres } = require('../constants');
 const createContent = require('./content');
 require('dotenv').config()
 

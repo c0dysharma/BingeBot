@@ -1,5 +1,5 @@
 require('dotenv').config()
-const { allGenres, countries, entertainment } = require('./constants');
+const { allGenres, countries, entertainment } = require('../constants');
 const createPage = require('./telegraph')
 
 // Movies and Tv shows
