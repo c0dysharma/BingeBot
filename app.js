@@ -125,7 +125,10 @@ bot.on('/itv', async (msg) => {
 // watch avaliable genres
 bot.on('/genres', msg => {
   msg.reply.text(avaliableGenres.join(', '));
+  console.log('testing');
 })
+
+
 
 // nothing required
 bot.on('sticker', msg => {
