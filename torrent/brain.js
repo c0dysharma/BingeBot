@@ -3,4 +3,4 @@ async function searchTorrent(snowfl, query, torrentConfig){
   return snowfl.url;
 }
 
-module.exports = searchTorrent;
+module.exports = {searchTorrent};
