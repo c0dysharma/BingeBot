@@ -11,6 +11,7 @@ const bot = new TeleBot(herokuConfig);
 const snowfl = new Snowfl();
 
 let page = 1;
+const axios = require('axios').default;
 
 // help text
 bot.on(['/start', '/Start', '/hello', 'start', '/help', 'help'], (msg) => {
@@ -142,6 +143,8 @@ bot.on('/torrent', async (msg) => {
   if (msg.text.split(' ').length == 1)
     msg.reply.text('Include search query. Try /start for examples');
   else {
+    let res = await (await axios.get('https://snowfl.com/'));
+    console.log(res.status);
     const query = msg.text.split(' ')[1];
     try {
       const res = await searchTorrent(snowfl, query, torrentConfig);
