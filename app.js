@@ -143,18 +143,19 @@ bot.on('/torrent', async (msg) => {
   if (msg.text.split(' ').length == 1)
     msg.reply.text('Include search query. Try /start for examples');
   else {
-    let res = await axios.get('https://snowfl.com/KLLkhVtnHYVHtSQXxAZWBtcTYhlRzRdcdX/fds/guGLEAGG/0/NONE/NONE/1?_=1657975576420', {
-      headers: {
-        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:101.0) Gecko/20100101 Firefox/101.0",
-        "Accept": "application / json, text/ javascript, */*; q=0.01",
-        "Accept-Language": "en-US,en;q=0.5",
-        "Accept-Encoding": "gzip, deflate, br",
-        "X-Requested-With": "XMLHttpRequest",
-        "Alt-Used": "snowfl.com",
-        "Connection": "keep-alive"
-      }
-    });
-    console.log(res.status);
+    fetch('https://snowfl.com/KLLkhVtnHYVHtSQXxAZWBtcTYhlRzRdcdX/fds/guGLEAGG/0/NONE/NONE/1?_=1657975576420').then(res => {console.log(res)})
+    // let res = await axios.get('https://snowfl.com/KLLkhVtnHYVHtSQXxAZWBtcTYhlRzRdcdX/fds/guGLEAGG/0/NONE/NONE/1?_=1657975576420', {
+    //   headers: {
+    //     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:101.0) Gecko/20100101 Firefox/101.0",
+    //     "Accept": "application / json, text/ javascript, */*; q=0.01",
+    //     "Accept-Language": "en-US,en;q=0.5",
+    //     "Accept-Encoding": "gzip, deflate, br",
+    //     "X-Requested-With": "XMLHttpRequest",
+    //     "Alt-Used": "snowfl.com",
+    //     "Connection": "keep-alive"
+    //   }
+    // });
+    // console.log(res.status);
 
     const query = msg.text.split(' ')[1];
     try {
