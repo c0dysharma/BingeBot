@@ -17,7 +17,18 @@ const torrentConfig = {
   includeNsfw: false
 }
 
+const telegraphCreatePageUrl = "https://api.telegra.ph/createPage";
+const telegraphPageParams = {
+  access_token: process.env.TELEGRAPH_TOKEN,
+  title: "Result",
+  author_name: "Binge Bot",
+  content: ""
+
+}
+
 module.exports = {
   serverConfig,
-  torrentConfig
+  torrentConfig,
+  telegraphCreatePageUrl,
+  telegraphPageParams
 }

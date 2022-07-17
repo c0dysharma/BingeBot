@@ -1,19 +1,12 @@
 const axios = require('axios').default;
+const { telegraphCreatePageUrl, telegraphPageParams } = require('../config');
 const { allGenres } = require('../constants');
 const createContent = require('./content');
 require('dotenv').config()
 
-
-const createPageUrl = "https://api.telegra.ph/createPage";
-const pageParams = {
-  access_token: process.env.TELEGRAPH_TOKEN,
-  title: "Result",
-  author_name: "Binge Bot",
-  content: ""
-
-}
 // calls telegra.ph API and creates page
 async function createPage(response) {
+  let myContent = telegraphPageParams;
   if (response.length == 0) return undefined;
   const results = [];
 
@@ -39,9 +32,9 @@ async function createPage(response) {
   }
 
   // get result in required node element format
-  pageParams.content = JSON.stringify(createContent(results));
+  myContent.content = JSON.stringify(createContent(results));
   try {
-    const res = await axios.post(createPageUrl, pageParams);  // creates actual page
+    const res = await axios.post(telegraphCreatePageUrl, myContent);  // creates actual page
     console.log(res.data.result.url);
     return res.data.result.url;
 
