@@ -1,7 +1,7 @@
 require('dotenv').config()
 const {Sort} = require('snowfl-api');
 
-const url = `${process.env.SERVER_URL}/webhook/${process.env.BOT_TOKEN}`;
+const url = `${process.env.SERVER_URL}`;
 const localConfig = {
   token: process.env.BOT_TOKEN,
   webhook: {
