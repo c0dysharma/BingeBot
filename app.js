@@ -138,6 +138,7 @@ bot.on('/genres', msg => {
   msg.reply.text(avaliableGenres.join(', '));
 })
 
+
 // searches torrent and give results
 bot.on('/torrent', async (msg) => {
   if (msg.text.split(' ').length == 1)
