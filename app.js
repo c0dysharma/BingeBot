@@ -1,14 +1,12 @@
 require('dotenv').config()
 const { welcomeMsg, avaliableGenres, entertainment, countries } = require('./constants');
 const fetchDetails = require('./recommends/fetch');
-const { localConfig, herokuConfig, torrentConfig } = require('./config')
+const { serverConfig } = require('./config')
 const { handleQuery } = require('./recommends/brain')
 const { searchTorrent } = require('./torrent/brain')
 
 const TeleBot = require('telebot');
-const { Snowfl, Sort } = require('snowfl-api');
-const bot = new TeleBot(herokuConfig);
-const snowfl = new Snowfl();
+const bot = new TeleBot(serverConfig);
 
 let page = 1;
 const axios = require('axios').default;
@@ -141,13 +139,12 @@ bot.on('/genres', msg => {
 
 // searches torrent and give results
 bot.on('/torrent', async (msg) => {
-  if (msg.text.split(' ').length == 1)
-    msg.reply.text('Include search query. Try /start for examples');
+  if (msg.text.split(' ').length <= 1 || msg.text.split(' ')[1].length <= 2)
+    msg.reply.text('Include search query of length greater  than 2. Try /start for examples');
   else {
     const query = msg.text.split(' ')[1];
     try {
-      const res = await searchTorrent(snowfl, query, torrentConfig);
-      console.log(res);
+      await searchTorrent(bot, msg, query);
     } catch (error) {
       console.log("I broke lol error->", error);
     }
