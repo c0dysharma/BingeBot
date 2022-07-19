@@ -46,8 +46,8 @@ async function createPage(responseArray) {
     const links = {
       "tag": "p", "children": [
         `${stuff.size}`,
-        { "tag": "a", "attrs": { "href": 'magnet:?xt=urn:btih:82d07a5f94a28887ccb3cddc29618e45ea74f508&dn=[JAV] [Uncensored] CND-045 [720p]&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.cyberia.is%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Fexplodie.org%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.birkenwald.de%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.moeking.me%3A6969%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=udp%3A%2F%2F9.rarbg.me%3A2970%2Fannounce' }, "children": [' Magnet Link'] },
-        { "tag": "a", "attrs": { "href": stuff.url }, "children": [' Torrent Link\n'] }
+        { "tag": "a", "attrs": { "href": '#' }, "children": [' Magnet Link'] },
+        { "tag": "a", "attrs": { "href": stuff.url }, "children": [' Site Link\n'] }
       ]
     }
 
