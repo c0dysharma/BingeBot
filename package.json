@@ -11,5 +11,19 @@
   },
   "scripts": {
     "start": "node app.js"
-  }
+  },
+  "name": "listmovies",
+  "description": "<h1 align=\"center\">   <b>Binge Bot</b>   <br> </h1>",
+  "version": "1.0.0",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/c0dysharma/BingeBot.git"
+  },
+  "author": "c0dysharma",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/c0dysharma/BingeBot/issues"
+  },
+  "homepage": "https://github.com/c0dysharma/BingeBot#readme"
 }
