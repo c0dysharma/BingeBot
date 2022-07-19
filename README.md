@@ -61,7 +61,7 @@ Create a file named exactly `.env` and fill these details
 
 ## **ToDos**
 
-🔸 Snowfl link support
+🔸 Torrent link support
 
 🔸 Filters
 

@@ -33,7 +33,7 @@ bot.on('callbackQuery', async msg => {
     ? 'fetchMovies'
     : 'fetchTV';
 
-  // get next page in response
+  // torrent next page in response
   page++;
   let result;
 
@@ -52,7 +52,7 @@ bot.on('callbackQuery', async msg => {
         [bot.inlineButton('More', { callback })]
       ]);
       // edit existing message with new response
-      bot.editMessageText({ chatId, messageId }, result.toString(),
+      bot.editMessatorrentext({ chatId, messageId }, result.toString(),
         { replyMarkup: moreButton })
     } else {
       // if no more result exits
@@ -67,7 +67,7 @@ bot.on('callbackQuery', async msg => {
 // returns true if event for such query exists
 function isHandled(text) {
   const allQuries = ['/start', '/Start', '/hello', 'start', '/help', 'help',
-    '/movies', '/tv', '/imovies', '/itv', '/genres', 'sticker', '/get'];
+    '/movies', '/tv', '/imovies', '/itv', '/genres', 'sticker', '/torrent'];
   return allQuries.includes(text.split(' ')[0]);
 }
 
@@ -137,8 +137,8 @@ bot.on('/genres', msg => {
 })
 
 
-// searches get and give results
-bot.on('/get', async (msg) => {
+// searches torrent and give results
+bot.on('/torrent', async (msg) => {
   if (msg.text.split(' ').length <= 1 || msg.text.split(' ')[1].length <= 2)
     msg.reply.text('Include search query of length greater  than 2. Try /start for examples');
   else {
