@@ -36,17 +36,17 @@ async function createPage(responseArray) {
 
   // data getting too large for telegra.ph lol limiting
   let limit = Math.min(responseArray.length, 50);
-  for ( let i=0; i<limit; i++) {
+  for (let i = 0; i < limit; i++) {
     const stuff = responseArray[i];
     // stuff.magnet = stuff.magnet ? stuff.magnet : stuff.url;
 
     const title = { "tag": "b", "children": [`${stuff.name}\n`] };
-    const details = { "tag": "p", "children": [`${stuff.type} • ${stuff.age}\n`] };
-    const stats = { "tag": "p", "children": [`${stuff.seeder} • ${stuff.leecher}\n`] };
+    const details = { "tag": "p", "children": [`Type: ${stuff.type} • Age: ${stuff.age}\n`] };
+    const stats = { "tag": "p", "children": [`Seeders: ${stuff.seeder} • Leechers: ${stuff.leecher}\n`] };
     const links = {
       "tag": "p", "children": [
-        `${stuff.size}`,
-        { "tag": "a", "attrs": { "href": '#' }, "children": [' Magnet Link'] },
+        `Size: ${stuff.size}`,
+        // { "tag": "a", "attrs": { "href": '#' }, "children": [' Magnet Link'] },
         { "tag": "a", "attrs": { "href": stuff.url }, "children": [' Site Link\n'] }
       ]
     }
