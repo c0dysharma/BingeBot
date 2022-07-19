@@ -3,7 +3,7 @@ const { welcomeMsg, avaliableGenres, entertainment, countries } = require('./con
 const fetchDetails = require('./recommends/fetch');
 const { serverConfig } = require('./config')
 const { handleQuery } = require('./recommends/brain')
-const { searchTorrent } = require('./torrent/brain')
+const { snowflSearch } = require('./snowfl/brain')
 
 const TeleBot = require('telebot');
 const bot = new TeleBot(serverConfig);
@@ -144,7 +144,7 @@ bot.on('/torrent', async (msg) => {
   else {
     const query = msg.text.split(' ')[1];
     try {
-      await searchTorrent(bot, msg, query);
+      await snowflSearch(bot, msg, query);
     } catch (error) {
       console.log("I broke lol error->", error);
     }

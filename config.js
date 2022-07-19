@@ -12,7 +12,7 @@ const serverConfig = {
   }
 }
 
-const torrentConfig = {
+const snowflConfig = {
   sort: Sort.MAX_SEED,
   includeNsfw: false
 }
@@ -28,7 +28,7 @@ const telegraphPageParams = {
 
 module.exports = {
   serverConfig,
-  torrentConfig,
+  snowflConfig,
   telegraphCreatePageUrl,
   telegraphPageParams
 }

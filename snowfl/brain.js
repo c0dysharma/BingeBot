@@ -1,12 +1,12 @@
-const { torrentConfig, telegraphCreatePageUrl, telegraphPageParams } = require("../config");
+const { snowflConfig, telegraphCreatePageUrl, telegraphPageParams } = require("../config");
 const { Snowfl } = require("snowfl-api");
 const axios = require('axios').default;
 const snowfl = new Snowfl();
 
 const supportedStuffs = ["Anime", "Movie", "Movies", "TV", "Video"]
 
-async function searchTorrent(bot, msg, query) {
-  const result = await snowfl.parse(query, torrentConfig);
+async function snowflSearch(bot, msg, query) {
+  const result = await snowfl.parse(query, snowflConfig);
   if (result.status != 200) {
     msg.reply.text('Unable to get data'); return;
   }
@@ -70,4 +70,4 @@ async function createPage(responseArray) {
   return res.data.result.url;
 }
 
-module.exports = { searchTorrent };
+module.exports = { snowflSearch };
