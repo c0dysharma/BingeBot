@@ -38,14 +38,15 @@ async function createPage(responseArray) {
   let limit = Math.min(responseArray.length, 50);
   for ( let i=0; i<limit; i++) {
     const stuff = responseArray[i];
-    stuff.magnet = stuff.magnet ? stuff.magnet : stuff.url;
+    // stuff.magnet = stuff.magnet ? stuff.magnet : stuff.url;
+
     const title = { "tag": "b", "children": [`${stuff.name}\n`] };
     const details = { "tag": "p", "children": [`${stuff.type} • ${stuff.age}\n`] };
     const stats = { "tag": "p", "children": [`${stuff.seeder} • ${stuff.leecher}\n`] };
     const links = {
       "tag": "p", "children": [
         `${stuff.size}`,
-        { "tag": "a", "attrs": { "href": stuff.magnet.toString() }, "children": [' Magnet Link'] },
+        { "tag": "a", "attrs": { "href": 'magnet:?xt=urn:btih:82d07a5f94a28887ccb3cddc29618e45ea74f508&dn=[JAV] [Uncensored] CND-045 [720p]&tr=udp%3A%2F%2Fopen.stealth.si%3A80%2Fannounce&tr=udp%3A%2F%2Fexodus.desync.com%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.cyberia.is%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.torrent.eu.org%3A451%2Fannounce&tr=udp%3A%2F%2Fexplodie.org%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.birkenwald.de%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.moeking.me%3A6969%2Fannounce&tr=udp%3A%2F%2Fipv4.tracker.harry.lu%3A80%2Fannounce&tr=udp%3A%2F%2F9.rarbg.me%3A2970%2Fannounce' }, "children": [' Magnet Link'] },
         { "tag": "a", "attrs": { "href": stuff.url }, "children": [' Torrent Link\n'] }
       ]
     }
