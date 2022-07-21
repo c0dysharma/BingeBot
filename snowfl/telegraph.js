@@ -11,7 +11,7 @@ async function createPage(responseArray) {
   for (let i = 0; i < limit; i++) {
     const stuff = responseArray[i];
     if (stuff.magnet) {
-      const mag = await axios.get(`http://mgnet.me/api/create?m=${stuff.magnet}`)
+      const mag = await axios.get(encodeURI(`http://mgnet.me/api/create?m=${stuff.magnet}`))
       if (mag.data.state == 'success')
         stuff.magnet = mag.data.shorturl;
     }
@@ -51,6 +51,6 @@ async function createPage(responseArray) {
   return res.data.result.url;
 }
 
-module.exports={
+module.exports = {
   createPage
 }
