@@ -112,6 +112,7 @@ const countries = {
 }
 
 const torrentLimit = 50
+const supportedStuffs = ["Anime", "Movie", "Movies", "TV", "Video"]
 
 module.exports = {
   allGenres,
@@ -119,5 +120,6 @@ module.exports = {
   avaliableGenres,
   entertainment,
   countries,
-  torrentLimit
+  torrentLimit,
+  supportedStuffs
 }

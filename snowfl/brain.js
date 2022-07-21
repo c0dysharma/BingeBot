@@ -1,12 +1,11 @@
 const { snowflConfig } = require("../config");
 const { Snowfl } = require("snowfl-api");
 const { createPage } = require("./telegraph");
+const { supportedStuffs } = require("../constants");
 const snowfl = new Snowfl();
 
-const supportedStuffs = ["Anime", "Movie", "Movies", "TV", "Video"]
-
 async function snowflSearch(bot, msg, query) {
-  msg.reply('Please wait getting you torrents 🏴‍☠️')
+  msg.reply.text('Please wait getting your torrents 🏴‍☠️')
   const result = await snowfl.parse(query, snowflConfig);
   if (result.status != 200) {
     msg.reply.text('Unable to get data'); return;
@@ -31,8 +30,8 @@ async function snowflSearch(bot, msg, query) {
     const generatedLink = await createPage(allLinks);
     msg.reply.text(generatedLink);
   } catch (e) {
-    console.log('Unable to get torrent links', e);
-    msg.reply.text('Unable to get torrent links');
+    console.log('Unable to create torrent links page', e);
+    msg.reply.text('Unable to create torrent links page');
   }
 }
 
