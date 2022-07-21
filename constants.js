@@ -86,13 +86,16 @@ const allGenres = [
 ];
 
 const welcomeMsg = `
-Just type /movies <genres here> for movies or /tv <genres here> for tv series.
--> If you want only indian stuffs use /imovies and /itv instead
--> genres should be seperated by space or an comma
--> Example: /movies romantic, action
--> Example:  /itv action comedy
-
-Type /genres to get a list of avaliable genres`
+Need Recommendation?
+  Just type /movies <genres here> for movies or /tv <genres here> for tv series.
+  -> If you want only indian stuffs use /imovies and /itv instead
+  -> genres should be seperated by space or an comma
+  -> Example: /movies romantic, action
+  -> Example:  /itv action comedy
+  Type /genres to get a list of avaliable genres
+  
+Need Torrent Links?
+  Just type /torrent <query here>`
 
 const avaliableGenres = [
   'History', 'Music', 'Thriller', 'Horror', 'Action', 'Adventure',
