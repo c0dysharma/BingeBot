@@ -16,8 +16,8 @@
 <img src="./screenshots/movies.PNG" title="movie Text" width="40%" height="40%" align="center">
 <img src="./screenshots/telegraph.PNG" title="telegraph Text" width="40%" height="40%" align="center">
 <img src="./screenshots/imovies.PNG" title="indian movies Text" width="40%" height="40%" align="center">
-<img src="./screenshots/snowflSearch.PNG" title="indian movies Text" width="40%" height="40%" align="center">
-<img src="./screenshots/snowflResult.PNG" title="indian movies Text" width="40%" height="40%" align="center">
+<img src="./screenshots/snowflSearch.PNG" title="Snowfl Search ex" width="40%" height="40%" align="center">
+<img src="./screenshots/snowflResult.PNG" title="Snowfl result ex" width="40%" height="40%" align="center">
 </p>
 
 <br>
