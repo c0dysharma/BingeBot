@@ -35,7 +35,7 @@ async function createPage(response) {
   myContent.content = JSON.stringify(createContent(results));
   try {
     const res = await axios.post(telegraphCreatePageUrl, myContent);  // creates actual page
-    console.log(res.data.result.url);
+    console.log('Recommendation links ->', res.data.result.url);
     return res.data.result.url;
 
   } catch (error) {

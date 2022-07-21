@@ -1,15 +1,18 @@
 const { snowflConfig } = require("../config");
 const { Snowfl } = require("snowfl-api");
-const { createPage } = require("./telegraph");
 const { supportedStuffs } = require("../constants");
+const createPage = require('./telegraph')
 const snowfl = new Snowfl();
 
 async function snowflSearch(bot, msg, query) {
   msg.reply.text('Please wait getting your torrents 🏴‍☠️')
+
+  // get result from snowfl api
   const result = await snowfl.parse(query, snowflConfig);
   if (result.status != 200) {
     msg.reply.text('Unable to get data'); return;
   }
+  // if empty
   if (result.data.length == 0) {
     msg.reply.text('Nothing Found, please refine search query'); return;
   }
@@ -21,6 +24,8 @@ async function snowflSearch(bot, msg, query) {
       if (currentType.startsWith(aval)) return true;
     } return false;
   })
+
+  // after filtering if nothing left
   if (allLinks.length == 0) {
     msg.reply.text('Nothing Found, please refine search query'); return;
   }

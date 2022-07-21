@@ -4,12 +4,13 @@ const { torrentLimit } = require("../constants");
 
 async function createPage(responseArray) {
   let myContent = telegraphPageParams;
-  let content = [];
+  let content = []; // gonna store param for telegraph api
 
   // data getting too large for telegra.ph lol limiting
   let limit = Math.min(responseArray.length, torrentLimit);
   for (let i = 0; i < limit; i++) {
     const stuff = responseArray[i];
+    // update magnet to shortened link coz telegraph shit :(
     if (stuff.magnet) {
       const mag = await axios.get(encodeURI(`http://mgnet.me/api/create?m=${stuff.magnet}`))
       if (mag.data.state == 'success')
@@ -45,12 +46,11 @@ async function createPage(responseArray) {
     if (stuff.magnet) format.children[0].children.push(torrentLink);
     content.push(format);
   }
+  // set the updated param
   myContent.content = content;
   const res = await axios.post(telegraphCreatePageUrl, myContent);
-  console.log(res.data.result.url);
+  console.log('Torrent link-> ',res.data.result.url);
   return res.data.result.url;
 }
 
-module.exports = {
-  createPage
-}
+module.exports = createPage
