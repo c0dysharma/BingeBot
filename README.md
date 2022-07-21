@@ -5,6 +5,7 @@
 
 <h2 align="center">I can suggest movies and tv/web series to you based on genres and popularity</h2>
 <h3 align="center">Try on <a href="https://t.me/binge1bot" target="_blank">https://t.me/binge1bot</a> </h3>
+<p align="center">New! Now Provides 🇹orrent Download Link</p>
 <hr>
 <br>
 
@@ -25,15 +26,17 @@
 <br>
 
 ## **Features**
-🔵 Multiple Genres Support
+Ⓜ️ultiple Genres Support
 
-🔵 Fast enough
+🇫ast enough
 
-🔵 Instant View Pages as Result
+🇮nstant View Pages as Result
 
-🔵 Filter for Indian movies and webseries
+🇫ilter for Indian movies and webseries
 
-🔵 Ratings and Overview 
+🇷atings and Overview 
+
+🇹orrent Support
 
 <br>
 
@@ -57,11 +60,11 @@ Create a file named exactly `.env` and fill these details
 
 ### **Usage**
 
-`node app.js` Running the server
+`node start` Running the server
 
 ## **ToDos**
 
-🔸 Snowfl link support
+🔸 ~~Snowfl link support~~
 
 🔸 Filters
 
