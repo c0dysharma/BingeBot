@@ -1,11 +1,12 @@
-const { snowflConfig, telegraphCreatePageUrl, telegraphPageParams } = require("../config");
+const { snowflConfig } = require("../config");
 const { Snowfl } = require("snowfl-api");
-const axios = require('axios').default;
+const { createPage } = require("./telegraph");
 const snowfl = new Snowfl();
 
 const supportedStuffs = ["Anime", "Movie", "Movies", "TV", "Video"]
 
 async function snowflSearch(bot, msg, query) {
+  msg.reply('Please wait getting you torrents 🏴‍☠️')
   const result = await snowfl.parse(query, snowflConfig);
   if (result.status != 200) {
     msg.reply.text('Unable to get data'); return;
@@ -26,57 +27,13 @@ async function snowflSearch(bot, msg, query) {
   }
 
   // create Telegraph page
-  const generatedLink = await createPage(allLinks);
-  msg.reply.text(generatedLink);
-}
-
-async function createPage(responseArray) {
-  let myContent = telegraphPageParams;
-  let content = [];
-
-  // data getting too large for telegra.ph lol limiting
-  let limit = Math.min(responseArray.length, 50);
-  for (let i = 0; i < limit; i++) {
-    const stuff = responseArray[i];
-    if (stuff.magnet) {
-      const mag = await axios.get(`http://mgnet.me/api/create?m=${stuff.magnet}`)
-      if (mag.data.state == 'success')
-        stuff.magnet = mag.data.shorturl;
-    }
-
-    const title = { "tag": "b", "children": [`${stuff.name}\n`] };
-    const details = { "tag": "p", "children": [`Type: ${stuff.type} • Age: ${stuff.age}\n`] };
-    const stats = { "tag": "p", "children": [`Seeders: ${stuff.seeder} • Leechers: ${stuff.leecher}\n`] };
-    const siteLink = {
-      "tag": "p", "children": [
-        `Size: ${stuff.size}`,
-        { "tag": "a", "attrs": { "href": stuff.url }, "children": [' Site Link '] }
-      ]
-    }
-    const torrentLink = {
-      "tag": "p", "children": [
-        { "tag": "a", "attrs": { "href": stuff.magnet }, "children": [' Magnet Link\n'] },
-      ]
-    }
-
-    let format = {
-      "tag": "ul", "children": [
-        {
-          "tag": "li", "children": []
-        }
-      ]
-    }
-    format.children[0].children.push(title);
-    format.children[0].children.push(details);
-    format.children[0].children.push(stats);
-    format.children[0].children.push(siteLink);
-    if (stuff.magnet) format.children[0].children.push(torrentLink);
-    content.push(format);
+  try {
+    const generatedLink = await createPage(allLinks);
+    msg.reply.text(generatedLink);
+  } catch (e) {
+    console.log('Unable to get torrent links', e);
+    msg.reply.text('Unable to get torrent links');
   }
-  myContent.content = content;
-  const res = await axios.post(telegraphCreatePageUrl, myContent);
-  console.log(res.data.result.url);
-  return res.data.result.url;
 }
 
 module.exports = { snowflSearch };

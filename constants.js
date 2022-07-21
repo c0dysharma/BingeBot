@@ -111,10 +111,13 @@ const countries = {
   globally: 1
 }
 
+const torrentLimit = 50
+
 module.exports = {
   allGenres,
   welcomeMsg,
   avaliableGenres,
   entertainment,
-  countries
+  countries,
+  torrentLimit
 }
