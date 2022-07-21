@@ -18,16 +18,16 @@ async function createPage(responseArray) {
     }
 
     const title = { "tag": "b", "children": [`${stuff.name}\n`] };
-    const details = { "tag": "p", "children": [`Type: ${stuff.type} • Age: ${stuff.age}\n`] };
-    const stats = { "tag": "p", "children": [`Seeders: ${stuff.seeder} • Leechers: ${stuff.leecher}\n`] };
+    const details = { "tag": "div", "children": [`Type: ${stuff.type} • Age: ${stuff.age}\n`] };
+    const stats = { "tag": "div", "children": [`Seeders: ${stuff.seeder} • Leechers: ${stuff.leecher}\n`] };
     const siteLink = {
-      "tag": "p", "children": [
+      "tag": "div", "children": [
         `Size: ${stuff.size}`,
         { "tag": "a", "attrs": { "href": stuff.url }, "children": [' Site Link '] }
       ]
     }
     const torrentLink = {
-      "tag": "p", "children": [
+      "tag": "div", "children": [
         { "tag": "a", "attrs": { "href": stuff.magnet }, "children": [' Magnet Link\n'] },
       ]
     }
@@ -49,7 +49,7 @@ async function createPage(responseArray) {
   // set the updated param
   myContent.content = content;
   const res = await axios.post(telegraphCreatePageUrl, myContent);
-  console.log('Torrent link-> ',res.data.result.url);
+  console.log('Torrent link-> ', res.data.result.url);
   return res.data.result.url;
 }
 

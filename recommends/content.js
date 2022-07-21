@@ -3,7 +3,7 @@ function createContent(data) {
   let content = [];
   for (let movie of data) {
     let title = { "tag": "b", "children": [`${movie.title} (${movie.year}) • Rating ${movie.rating}` ] };
-    let genre = { "tag": "p", "children": [`\n- ${movie.genres}`] };
+    let genre = { "tag": "div", "children": [`\n- ${movie.genres}`] };
     let overview = { "tag": "i", "children": [`\n${movie.overview}`]
 }
 
