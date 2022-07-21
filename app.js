@@ -52,7 +52,7 @@ bot.on('callbackQuery', async msg => {
         [bot.inlineButton('More', { callback })]
       ]);
       // edit existing message with new response
-      bot.editMessatorrentext({ chatId, messageId }, result.toString(),
+      bot.editMessageText({ chatId, messageId }, result.toString(),
         { replyMarkup: moreButton })
     } else {
       // if no more result exits
